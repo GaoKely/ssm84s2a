@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.ClassroomDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.entity.ClassroomEntity" id="classroomtMap">
+        <result property="tablename" column="tablename"/>
+        <result property="userid" column="userid"/>
+        <result property="id" column="id"/>
+        <result property="room" column="room"/>
+        <result property="state" column="state"/>
+        <result property="usetime" column="usetime"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.ClassroomVO" >
+		SELECT * FROM classroom  classroom
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.ClassroomVO" >
+		SELECT  classroom.* FROM classroom  classroom
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.ClassroomView" >
+
+		SELECT  classroom.* FROM classroom  classroom
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.entity.view.ClassroomView" >
+		SELECT * FROM classroom  classroom <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<delete id="deleteBatchIds">
+		DELETE FROM classroom WHERE id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="selectById" resultType="com.entity.ClassroomEntity">
+		SELECT  * FROM classroom WHERE id = #{id}
+	</select>
+
+	<update id="update">
+		update classroom
+		<set >
+			<if test="room != null" >
+				room = #{room},
+			</if>
+			<if test="status != null" >
+				status = #{status},
+			</if>
+			<if test="note != null" >
+				note = #{note},
+			</if>
+			<if test="usetime != null" >
+				usetime = #{usetime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<insert id="insert">
+		insert into classroom
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="room != null">
+				room,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+			<if test="usetime != null">
+				usetime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="room != null">
+				#{room},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="note != null">
+				#{note},
+			</if>
+			<if test="usetime != null">
+				#{usetime},
+			</if>
+		</trim>
+	</insert>
+</mapper>

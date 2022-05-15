@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.LibraryDao">
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.LibraryVO" >
+		SELECT * FROM library  library
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.LibraryVO" >
+		SELECT  library.* FROM library  library
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.LibraryView" >
+
+		SELECT  library.* FROM library  library
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.entity.view.LibraryView" >
+		SELECT * FROM library  library <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<delete id="deleteBatchIds">
+		DELETE FROM library WHERE id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="selectById" resultType="com.entity.LibraryEntity">
+		SELECT  * FROM library WHERE id = #{id}
+	</select>
+
+	<update id="update">
+		update library
+		<set >
+			<if test="name != null" >
+				name = #{name},
+			</if>
+			<if test="status != null" >
+				status = #{status},
+			</if>
+			<if test="note != null" >
+				note = #{note},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<insert id="insert">
+		insert into library
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="note != null">
+				#{note},
+			</if>
+		</trim>
+	</insert>
+</mapper>

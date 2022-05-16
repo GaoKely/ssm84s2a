@@ -4,26 +4,26 @@
 <mapper namespace="com.dao.KaoshichengjiDao">
 	<select id="selectListVO"
 		resultType="com.entity.vo.KaoshichengjiVO" >
-		SELECT * FROM kaoshichengji  kaoshichengji         
+		SELECT *,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
 		resultType="com.entity.vo.KaoshichengjiVO" >
-		SELECT  kaoshichengji.* FROM kaoshichengji  kaoshichengji
+		SELECT  kaoshichengji.*,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
 		resultType="com.entity.view.KaoshichengjiView" >
 
-		SELECT  kaoshichengji.* FROM kaoshichengji  kaoshichengji 	        
+		SELECT  kaoshichengji.*,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
 		resultType="com.entity.view.KaoshichengjiView" >
-		SELECT * FROM kaoshichengji  kaoshichengji <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT *,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
 
@@ -42,7 +42,7 @@
 		update kaoshichengji
 		<set >
 			<if test="courseId != null" >
-				courseId = #{courseId},
+				course_id = #{courseId},
 			</if>
 			<if test="achievement != null" >
 				achievement = #{achievement},
@@ -57,13 +57,13 @@
 				gpa = #{gpa},
 			</if>
 			<if test="courseState != null" >
-				courseState = #{courseState},
+				course_state = #{courseState},
 			</if>
 			<if test="note != null" >
 				note = #{note},
 			</if>
 			<if test="examinationState != null" >
-				examinationState = #{examinationState},
+				examination_state = #{examinationState},
 			</if>
 		</set>
 		where id = #{id}
@@ -73,7 +73,7 @@
 		insert into kaoshichengji
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="courseId != null">
-				courseId,
+				course_id,
 			</if>
 			<if test="achievement != null">
 				achievement,
@@ -88,13 +88,13 @@
 				gpa,
 			</if>
 			<if test="courseState != null" >
-				courseState,
+				course_state,
 			</if>
 			<if test="note != null" >
 				note,
 			</if>
 			<if test="examinationState != null" >
-				examinationState,
+				examination_state,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">

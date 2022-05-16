@@ -91,6 +91,17 @@ public class KaoshichengjiVO  implements Serializable {
 	/*考试性质；0-正常考试；1-补考；2-重修*/
 	private String examinationState;
 
+	/*科目名称*/
+	private String courseName;
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
 	public String getCourseId() {
 		return courseId;
 	}

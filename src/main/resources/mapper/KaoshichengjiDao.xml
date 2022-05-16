@@ -4,26 +4,26 @@
 <mapper namespace="com.dao.KaoshichengjiDao">
 	<select id="selectListVO"
 		resultType="com.entity.vo.KaoshichengjiVO" >
-		SELECT *,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
+		SELECT *,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
 		resultType="com.entity.vo.KaoshichengjiVO" >
-		SELECT  kaoshichengji.*,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
+		SELECT  kaoshichengji.*,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
 		resultType="com.entity.view.KaoshichengjiView" >
 
-		SELECT  kaoshichengji.*,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
+		SELECT  kaoshichengji.*,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
 		resultType="com.entity.view.KaoshichengjiView" >
-		SELECT *,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT *,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
 
@@ -35,7 +35,7 @@
 	</delete>
 
 	<select id="selectById" resultType="com.entity.ClassroomEntity">
-		SELECT  * FROM kaoshichengji WHERE id = #{id}
+		SELECT  *,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji WHERE id = #{id}
 	</select>
 
 	<update id="update">
@@ -43,6 +43,9 @@
 		<set >
 			<if test="courseId != null" >
 				course_id = #{courseId},
+			</if>
+			<if test="courseName != null" >
+				course_name = #{courseName},
 			</if>
 			<if test="achievement != null" >
 				achievement = #{achievement},
@@ -75,6 +78,9 @@
 			<if test="courseId != null">
 				course_id,
 			</if>
+			<if test="courseName != null" >
+				course_name,
+			</if>
 			<if test="achievement != null">
 				achievement,
 			</if>
@@ -100,6 +106,9 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="courseId != null">
 				#{courseId},
+			</if>
+			<if test="courseName != null" >
+				#{courseName},
 			</if>
 			<if test="achievement != null">
 				#{achievement},

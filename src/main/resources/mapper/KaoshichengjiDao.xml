@@ -134,5 +134,10 @@
 		</trim>
 	</insert>
 
-	
+	<select id="selectByMap" resultType="com.entity.KaoshichengjiEntity" >
+		SELECT  kaoshichengji.*,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
+		<where>
+			1=1
+		</where>
+	</select>
 </mapper>

@@ -9,6 +9,7 @@ import com.entity.vo.CourseVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -32,4 +33,7 @@ public interface CourseDao extends BaseMapper<CourseEntity> {
     Integer insert(CourseEntity course);
 
     boolean update(CourseEntity course);
+
+    Map<String,Object> selectMap(CourseEntity course);
+
 }

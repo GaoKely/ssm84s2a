@@ -79,4 +79,9 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="selectMap" resultType="java.util.Map">
+		SELECT  COALESCE(SUM(credit),0.00) sumCredit FROM course
+	</select>
+
 </mapper>

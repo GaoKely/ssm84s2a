@@ -39,4 +39,6 @@ public interface KaoshichengjiDao extends BaseMapper<KaoshichengjiEntity> {
 	Integer insert(KaoshichengjiEntity kaoshichengji);
 
 	boolean update(KaoshichengjiEntity kaoshichengji);
+
+	List<KaoshichengjiEntity> selectByMap(Map<String,Object> params);
 }

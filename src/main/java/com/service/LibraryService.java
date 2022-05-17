@@ -36,5 +36,7 @@ public interface LibraryService extends IService<LibraryEntity> {
 
     boolean update(LibraryEntity library);
 
+    boolean updateLibraryState(Map<String, Object> params);
+
 
 }

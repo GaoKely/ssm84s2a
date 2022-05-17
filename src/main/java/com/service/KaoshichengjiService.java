@@ -40,5 +40,7 @@ public interface KaoshichengjiService extends IService<KaoshichengjiEntity> {
 	boolean insert(KaoshichengjiEntity kaoshichengji);
 
 	boolean update(KaoshichengjiEntity kaoshichengji);
+
+	List<KaoshichengjiEntity> selectByMap(Map<String, Object> params);
 }
 

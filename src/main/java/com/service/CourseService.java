@@ -36,5 +36,7 @@ public interface CourseService extends IService<CourseEntity> {
 
     boolean update(CourseEntity course);
 
+    Map<String,Object> selectAllCourseCredit();
+
 
 }

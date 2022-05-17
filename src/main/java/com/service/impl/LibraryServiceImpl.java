@@ -88,4 +88,13 @@ public class LibraryServiceImpl extends ServiceImpl<LibraryDao, LibraryEntity> i
     public boolean update(LibraryEntity library){
         return baseMapper.update(library);
     }
+
+    @Override
+    public boolean updateLibraryState(Map<String, Object> params){
+        LibraryEntity library = new LibraryEntity();
+        Long id = Long.parseLong(params.get("id").toString());
+        library.setId(id);
+        library.setState(params.get("state").toString());
+        return baseMapper.update(library);
+    }
 }

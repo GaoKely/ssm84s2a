@@ -85,4 +85,9 @@ public class KaoshichengjiServiceImpl extends ServiceImpl<KaoshichengjiDao, Kaos
 	public boolean update(KaoshichengjiEntity kaoshichengji){
 		return baseMapper.update(kaoshichengji);
 	}
+
+	@Override
+	public List<KaoshichengjiEntity> selectByMap(Map<String, Object> params) {
+		return baseMapper.selectByMap(params);
+	}
 }

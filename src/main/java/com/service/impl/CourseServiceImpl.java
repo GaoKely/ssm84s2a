@@ -86,4 +86,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseDao, CourseEntity> impl
     public boolean update(CourseEntity course){
         return baseMapper.update(course);
     }
+
+    @Override
+    public Map<String,Object> selectAllCourseCredit(){
+        CourseEntity course = null;
+        Map<String,Object> map = baseMapper.selectMap(course);
+        return map;
+    }
 }

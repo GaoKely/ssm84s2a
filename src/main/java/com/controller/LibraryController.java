@@ -74,6 +74,15 @@ public class LibraryController {
         return R.ok();
     }
 
+    /**
+     * 图书馆占座
+     */
+    @RequestMapping("/updateLibraryState")
+    public R updateLibraryState(@RequestParam Map<String, Object> params){
+        libraryService.updateLibraryState(params);//全部更新
+        return R.ok();
+    }
+
 
 
 //    /**

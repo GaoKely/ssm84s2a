@@ -74,6 +74,14 @@ public class CourseController {
         return R.ok();
     }
 
+    /**
+     * 计算总学分
+     */
+    @RequestMapping("/selectAllCourseCredit")
+    public R selectAllCourseCredit(){ Map<String,Object> map = courseService.selectAllCourseCredit();
+        return R.ok().put("data", map);
+    }
+
 
 
 //    /**

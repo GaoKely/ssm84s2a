@@ -42,5 +42,7 @@ public interface KaoshichengjiService extends IService<KaoshichengjiEntity> {
 	boolean update(KaoshichengjiEntity kaoshichengji);
 
 	List<KaoshichengjiEntity> selectByMap(Map<String, Object> params);
+
+	Map<String,Object> selectCourseId (String courseName);
 }
 

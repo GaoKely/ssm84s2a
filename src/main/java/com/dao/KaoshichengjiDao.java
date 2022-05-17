@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.entity.CourseEntity;
 import com.entity.KaoshichengjiEntity;
 import com.entity.KaoshichengjiEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -41,4 +42,6 @@ public interface KaoshichengjiDao extends BaseMapper<KaoshichengjiEntity> {
 	boolean update(KaoshichengjiEntity kaoshichengji);
 
 	List<KaoshichengjiEntity> selectByMap(Map<String,Object> params);
+
+	Map<String,Object> selectMap(KaoshichengjiEntity kao);
 }

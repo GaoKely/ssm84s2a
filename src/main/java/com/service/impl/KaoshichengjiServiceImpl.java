@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.entity.CourseEntity;
 import com.entity.KaoshichengjiEntity;
 import org.springframework.stereotype.Service;
 import java.util.Map;
@@ -89,5 +90,13 @@ public class KaoshichengjiServiceImpl extends ServiceImpl<KaoshichengjiDao, Kaos
 	@Override
 	public List<KaoshichengjiEntity> selectByMap(Map<String, Object> params) {
 		return baseMapper.selectByMap(params);
+	}
+
+	@Override
+	public Map<String,Object> selectCourseId(String courseName){
+		KaoshichengjiEntity kao = new KaoshichengjiEntity();
+		kao.setCourseName(courseName);
+		Map<String,Object> returnMap = baseMapper.selectMap(kao);
+		return returnMap;
 	}
 }

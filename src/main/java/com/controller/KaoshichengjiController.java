@@ -114,26 +114,51 @@ public class KaoshichengjiController {
 
     //导入成绩excel
     @RequestMapping("/uploadExcel")
-    public R uploadExcel(@RequestParam("jsonData") String post, @RequestParam("file") MultipartFile file, HttpServletRequest request)throws Exception {
+    public R uploadExcel(@RequestParam("file_name") String fileName,@RequestParam("file") MultipartFile file, HttpServletRequest request)throws Exception {
         //获取excel文件
-        Workbook workbook =new XSSFWorkbook(file.getInputStream());;
+        Workbook workbook = null;
+        if(fileName.endsWith(".xls")){
+            workbook = new HSSFWorkbook(file.getInputStream());
+        }else{
+            workbook = new XSSFWorkbook(file.getInputStream());
+        }
+
         List<KaoshichengjiEntity> list=new ArrayList<KaoshichengjiEntity>();
         int totalsheet=workbook.getNumberOfSheets();//获取 Excel 文件中的全部 Sheet 页数量
         Sheet sheet=null;
         for (int i = 0; i < totalsheet; i++) {// 循环 Excel 文件中的全部 Sheet 页
             sheet=workbook.getSheetAt(i);// 获取 Sheet 页对象
             for (int j = 1; j <= sheet.getLastRowNum(); j++) {// 循环 Excel 行
-                KaoshichengjiEntity kao = null;
+                KaoshichengjiEntity kao = new KaoshichengjiEntity();
                 kao.setXuehao(sheet.getRow(j).getCell(0).toString());
                 kao.setXueshengxingming(sheet.getRow(j).getCell(1).toString());
                 kao.setCourseName(sheet.getRow(j).getCell(2).toString());
+                //根据科目名称查询科目ID
+                Map<String,Object> map = kaoshichengjiService.selectCourseId(sheet.getRow(j).getCell(2).toString());
+                if(map.size()>0){
+                    kao.setCourseId(map.get("id").toString());
+                }else{
+                    kao.setCourseId("");
+                }
                 kao.setAchievement(Double.parseDouble(sheet.getRow(j).getCell(3).toString()));
-                kao.setState(sheet.getRow(j).getCell(4).toString());
+                String state1 = sheet.getRow(j).getCell(4).toString();
+                Double f = Double.valueOf(state1);
+                int state = (int)Math.ceil(f);
+                kao.setState(state+"");
                 kao.setCredit(Double.parseDouble(sheet.getRow(j).getCell(5).toString()));
                 kao.setGpa(Double.parseDouble(sheet.getRow(j).getCell(6).toString()));
-                kao.setCourseState(sheet.getRow(j).getCell(7).toString());
-                kao.setExaminationState(sheet.getRow(j).getCell(8).toString());
-                kao.setNote(sheet.getRow(j).getCell(9).toString());
+                String courseState1 = sheet.getRow(j).getCell(7).toString();
+                Double f1 = Double.valueOf(courseState1);
+                int courseState = (int)Math.ceil(f1);
+                kao.setCourseState(courseState+"");
+                String examinationState1 = sheet.getRow(j).getCell(8).toString();
+                Double f2 = Double.valueOf(examinationState1);
+                int examinationState = (int)Math.ceil(f2);
+                kao.setExaminationState(examinationState+"");
+                String note1 = sheet.getRow(j).getCell(9).toString();
+                Double f3 = Double.valueOf(note1);
+                int note = (int)Math.ceil(f3);
+                kao.setNote(note+"");
                 list.add(kao);
             }
         }
@@ -143,7 +168,8 @@ public class KaoshichengjiController {
                 kaoshichengjiService.insert(kao);
             }
         }catch (Exception e){
-            R.error("导入失败，请重试");
+            System.out.println("导入失败异常："+e);
+            return R.error("导入失败，请重试");
         }
         return R.ok("导入成功");
 
@@ -176,6 +202,7 @@ public class KaoshichengjiController {
         row.createCell(7).setCellValue("选课属性");
         row.createCell(8).setCellValue("考试性质");
         row.createCell(9).setCellValue("备注");
+        row.createCell(10).setCellValue("注意事项");
 
         row = sheet.createRow(1); // 从第2行开始填充数据
 
@@ -189,6 +216,8 @@ public class KaoshichengjiController {
         row.createCell(7).setCellValue("选课属性；0-选修；1-必修");
         row.createCell(8).setCellValue("考试性质；0-正常考试；1-补考；2-重修");
         row.createCell(9).setCellValue("备注；0-非正常；1-正常");
+        row.createCell(9).setCellValue("导入请将所有单元列设置为文本，导入时请删除此列");
+
 
 
         response.setContentType("application/octet-stream");

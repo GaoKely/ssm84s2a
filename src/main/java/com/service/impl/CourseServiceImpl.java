@@ -25,6 +25,8 @@ import java.util.Map;
 public class CourseServiceImpl extends ServiceImpl<CourseDao, CourseEntity> implements CourseService {
 
 
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<CourseEntity> page = this.selectPage(

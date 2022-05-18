@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.CourseInfoDao">
+
+	<!--<select id="selectListVO"
+		resultType="com.entity.vo.CourseVO" >
+		SELECT * FROM course  course
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.CourseVO" >
+		SELECT  course.* FROM course  course
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.CourseView" >
+
+		SELECT  course.* FROM course  course
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>-->
+
+	<select id="selectByMap" resultType="com.entity.CourseInfoEntity" >
+		SELECT  id,pastern,major,classinfo,note,userid,CAST(info AS CHAR) info FROM courseinfo
+		<where>
+			1=1
+			<if test="userid != null " >
+				and userid = #{userid},
+			</if>
+			<if test="pastern != null" >
+				and pastern = #{pastern},
+			</if>
+			<if test="classinfo != null" >
+				and classinfo = #{classinfo},
+			</if>
+			<if test="major != null" >
+				and major = #{major},
+			</if>
+		</where>
+	</select>
+	
+<!--	<select id="selectView"-->
+<!--		resultType="com.entity.view.CourseView" >-->
+<!--		SELECT * FROM course  course <where> 1=1 ${ew.sqlSegment}</where>-->
+<!--	</select>-->
+
+<!--	<delete id="deleteBatchIds">-->
+<!--		DELETE FROM course WHERE id IN-->
+<!--		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">-->
+<!--			#{item}-->
+<!--		</foreach>-->
+<!--	</delete>-->
+
+<!--	<select id="selectById" resultType="com.entity.CourseEntity">-->
+<!--		SELECT  * FROM course WHERE id = #{id}-->
+<!--	</select>-->
+
+	<update id="update">
+		update courseinfo
+		<set >
+			<if test="pastern != null" >
+				pastern = #{pastern},
+			</if>
+			<if test="major != null" >
+				major = #{major},
+			</if>
+			<if test="classinfo != classinfo" >
+				classinfo = #{classinfo},
+			</if>
+			<if test="note != note" >
+				note = #{note},
+			</if>
+			<if test="info != info" >
+				info = #{info},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<insert id="insert">
+		insert into courseinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pastern != null">
+				pastern,
+			</if>
+			<if test="major != null">
+				major,
+			</if>
+			<if test="classinfo != null">
+				classinfo,
+			</if>
+			<if test="note != null" >
+				note,
+			</if>
+			<if test="userid != null" >
+				userid,
+			</if>
+			<if test="info != null" >
+				info,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pastern != null">
+				#{pastern},
+			</if>
+			<if test="major != null">
+				#{major},
+			</if>
+			<if test="classinfo != null">
+				#{classinfo},
+			</if>
+			<if test="note != null" >
+				#{note},
+			</if>
+			<if test="userid != null" >
+				#{userid},
+			</if>
+			<if test="info != null" >
+				#{info},
+			</if>
+		</trim>
+	</insert>
+
+<!--	<select id="selectMap" resultType="java.util.Map">-->
+<!--		SELECT  COALESCE(SUM(credit),0.00) sumCredit FROM course-->
+<!--	</select>-->
+
+</mapper>

@@ -144,4 +144,18 @@
 	<select id="selectMap" resultType="java.util.Map">
 		SELECT  id FROM course where name = #{courseName}
 	</select>
+
+	<select id="selectMaps" resultType="java.util.Map">
+		SELECT course_id,course_name,achievement,AVG(achievement) pjz FROM kaoshichengji
+		<where> 1=1 ${ew.sqlSegment}</where>
+		GROUP BY course_id
+	</select>
+
+	<select id="selectMapsTwo" resultType="java.util.Map">
+		SELECT course_id,course_name,achievement,AVG(achievement) pjz,AVG(achievement)*credit/(SELECT SUM(credit) FROM course) jqpjf
+		 FROM kaoshichengji
+		<where> 1=1 ${ew.sqlSegment}</where>
+		GROUP BY course_id
+	</select>
+
 </mapper>

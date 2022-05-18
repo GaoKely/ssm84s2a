@@ -312,6 +312,19 @@ public class KaoshichengjiController {
         workbook.write(response.getOutputStream());
     }
 
+    /**
+     * 计算绩点+平均分
+     */
+    @RequestMapping("/selectCredit")
+    public R selectCredit(@RequestParam Map<String, Object> params){
+        KaoshichengjiEntity kaoshichengji = new KaoshichengjiEntity();
+        kaoshichengji.setXuehao(params.get("xuehao").toString());
+        EntityWrapper<KaoshichengjiEntity> ew = new EntityWrapper<KaoshichengjiEntity>();
+        ew.allEq(MPUtil.allEQMapPre(kaoshichengji, "kaoshichengji"));
+        List<Map<String,Object>> list = kaoshichengjiService.selectCredit(ew);
+        return R.ok().put("data", list);
+    }
+
 //    /**
 //     * 后端详情
 //     */

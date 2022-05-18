@@ -44,5 +44,7 @@ public interface KaoshichengjiService extends IService<KaoshichengjiEntity> {
 	List<KaoshichengjiEntity> selectByMap(Map<String, Object> params);
 
 	Map<String,Object> selectCourseId (String courseName);
+
+	List<Map<String,Object>> selectCredit(@Param("ew") Wrapper<KaoshichengjiEntity> wrapper);
 }
 

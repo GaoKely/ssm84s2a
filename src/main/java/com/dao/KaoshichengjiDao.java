@@ -44,4 +44,6 @@ public interface KaoshichengjiDao extends BaseMapper<KaoshichengjiEntity> {
 	List<KaoshichengjiEntity> selectByMap(Map<String,Object> params);
 
 	Map<String,Object> selectMap(KaoshichengjiEntity kao);
+
+	List<Map<String,Object>> selectMaps(@Param("ew") Wrapper<KaoshichengjiEntity> wrapper);
 }

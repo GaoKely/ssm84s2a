@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.annotation.IgnoreAuth;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.entity.KaoshichengjiEntity;
 import com.entity.LibraryEntity;
 import com.service.LibraryService;
 import com.utils.MPUtil;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -115,6 +118,18 @@ public class LibraryController {
 //        ew.allEq(MPUtil.allEQMapPre( library, "library"));
 //        return R.ok().put("data", libraryService.selectListView(ew));
 //    }
+
+    /**
+     * 前端列表
+     */
+    @IgnoreAuth
+    @RequestMapping("/list")
+    public R list(@RequestParam Map<String, Object> params, LibraryEntity library,
+                  HttpServletRequest request) {
+        List<LibraryEntity> list = libraryService.selectByMap(params);
+        return R.ok().put("data", list);
+    }
+
 //
 //    /**
 //     * 查询

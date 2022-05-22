@@ -2,6 +2,7 @@ package com.service;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.entity.KaoshichengjiEntity;
 import com.entity.LibraryEntity;
 import com.entity.view.LibraryView;
 import com.entity.vo.LibraryVO;
@@ -38,5 +39,5 @@ public interface LibraryService extends IService<LibraryEntity> {
 
     boolean updateLibraryState(Map<String, Object> params);
 
-
+    List<LibraryEntity> selectByMap(Map<String, Object> params);
 }

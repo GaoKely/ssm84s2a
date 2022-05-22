@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.dao.LibraryDao;
+import com.entity.KaoshichengjiEntity;
 import com.entity.LibraryEntity;
 import com.entity.view.LibraryView;
 import com.entity.vo.LibraryVO;
@@ -96,5 +97,10 @@ public class LibraryServiceImpl extends ServiceImpl<LibraryDao, LibraryEntity> i
         library.setId(id);
         library.setState(params.get("state").toString());
         return baseMapper.update(library);
+    }
+
+    @Override
+    public List<LibraryEntity> selectByMap(Map<String, Object> params) {
+        return baseMapper.selectByMap(params);
     }
 }

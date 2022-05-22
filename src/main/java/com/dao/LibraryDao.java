@@ -3,6 +3,7 @@ package com.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.entity.KaoshichengjiEntity;
 import com.entity.LibraryEntity;
 import com.entity.LibraryEntity;
 import com.entity.view.LibraryView;
@@ -10,6 +11,7 @@ import com.entity.vo.LibraryVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -33,4 +35,6 @@ public interface LibraryDao extends BaseMapper<LibraryEntity> {
     Integer insert(LibraryEntity Library);
 
     boolean update(LibraryEntity Library);
+
+    List<LibraryEntity> selectByMap(Map<String,Object> params);
 }

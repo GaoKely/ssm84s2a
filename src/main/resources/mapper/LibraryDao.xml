@@ -79,4 +79,8 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="selectByMap" resultType="com.entity.LibraryEntity" >
+		SELECT * FROM library  library
+	</select>
 </mapper>

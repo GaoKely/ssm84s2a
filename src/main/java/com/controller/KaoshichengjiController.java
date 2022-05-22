@@ -86,9 +86,19 @@ public class KaoshichengjiController {
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params, KaoshichengjiEntity kaoshichengji,
                   HttpServletRequest request) {
-        EntityWrapper<KaoshichengjiEntity> ew = new EntityWrapper<KaoshichengjiEntity>();
-        PageUtils page = kaoshichengjiService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, kaoshichengji), params), params));
-        return R.ok().put("data", page);
+        List<KaoshichengjiEntity> list = kaoshichengjiService.selectByMap(params);
+        return R.ok().put("data", list);
+    }
+
+    /**
+     * 前端列表
+     */
+    @IgnoreAuth
+    @RequestMapping("/list2")
+    public R list2(@RequestParam Map<String, Object> params, KaoshichengjiEntity kaoshichengji,
+                  HttpServletRequest request) {
+        List<KaoshichengjiEntity> list = kaoshichengjiService.selectByMap(params);
+        return R.ok().put("data", list);
     }
 
     /**

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -122,22 +121,31 @@ public class KaoshichengjiServiceImpl extends ServiceImpl<KaoshichengjiDao, Kaos
 			BigDecimal ten = new BigDecimal(map.get("pjz").toString());
 			if((one.compareTo(ten)>0 && two.compareTo(ten)<0) || one.compareTo(ten)==0 || two.compareTo(ten)==0){
 				map.put("jidian",4.5);
+				map.put("bxjidian",4.3);
 			}else if((two.compareTo(ten)>0 && thr.compareTo(ten)<0) || thr.compareTo(ten)==0){
 				map.put("jidian",4.0);
+				map.put("bxjidian",3.8);
 			}else if((thr.compareTo(ten)>0 && fou.compareTo(ten)<0) || fou.compareTo(ten)==0){
 				map.put("jidian",3.5);
+				map.put("bxjidian",3.3);
 			}else if((fou.compareTo(ten)>0 && fir.compareTo(ten)<0) || fir.compareTo(ten)==0){
 				map.put("jidian",3.0);
+				map.put("bxjidian",2.8);
 			}else if((fir.compareTo(ten)>0 && six.compareTo(ten)<0) || six.compareTo(ten)==0){
 				map.put("jidian",2.5);
+				map.put("bxjidian",2.3);
 			}else if((six.compareTo(ten)>0 && sev.compareTo(ten)<0) || sev.compareTo(ten)==0){
 				map.put("jidian",2.0);
+				map.put("bxjidian",1.8);
 			}else if((sev.compareTo(ten)>0 && eit.compareTo(ten)<0) || eit.compareTo(ten)==0){
 				map.put("jidian",1.5);
+				map.put("bxjidian",1.3);
 			}else if((eit.compareTo(ten)>0 && nin.compareTo(ten)<0) || nin.compareTo(ten)==0){
 				map.put("jidian",1.0);
+				map.put("bxjidian",1.0);
 			}else{
 				map.put("jidian",0.0);
+				map.put("bxjidian",0.0);
 			}
 		}
 		return list;

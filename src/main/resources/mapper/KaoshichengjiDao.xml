@@ -138,6 +138,9 @@
 		SELECT  kaoshichengji.*,course_name courseName,course_id courseId,course_state courseState,examination_state examinationState FROM kaoshichengji  kaoshichengji
 		<where>
 			1=1
+			<if test="xuehao != null">
+				and kaoshichengji.xuehao = #{xuehao}
+			</if>
 		</where>
 	</select>
 
